@@ -128,10 +128,14 @@ void inserirElemento()
 	cin >> novo->valor;
 	novo->prox = NULL;
 
-	if (primeiro == NULL)
+	if (posicaoElemento(novo->valor) != NULL)
 	{
-		primeiro = novo;
+		cout << "Este elemento ja existe na lista" << endl;
 	}
+		else if (primeiro == NULL)
+		{
+		primeiro = novo;
+		}
 	else
 	{
 		// procura o final da lista
@@ -145,11 +149,59 @@ void inserirElemento()
 
 void excluirElemento()
 {
-	
+	if (primeiro == NULL) {
+		cout << "Lista vazia. \n";
+		return;
+	}
+	else {
+		int del;
+		cout << "Digite o numero que quer deletar: ";
+		cin >> del;
+
+		NO* aux = primeiro;
+		NO* anterior = NULL; 
+		
+		while (aux != NULL) {
+			NO* paraDel = aux;
+			if (aux->valor == del) {
+				if (anterior == NULL) {
+					primeiro = aux->prox;
+				}
+				else {
+					anterior->prox = aux->prox;
+				}
+				free(paraDel);
+				cout << "Numero excluido! \n";
+				return;
+			}
+			anterior = aux;
+			aux = aux->prox;
+		}
+		cout << "Numero nao econtrado. \n";
+	}
 }
 
 void buscarElemento()
 {
+	if (primeiro == NULL) {
+		cout << "Lista vazia. \n";
+		return;
+	}
+	else {
+		int busca;
+		cout << "Digite o numero que quer encontrar: ";
+		cin >> busca;
+
+		NO* aux = primeiro;
+		while (aux != NULL) {
+			if (aux->valor == busca) {
+				cout << "O numero esta na lista. \n";
+				return;
+			}
+			aux = aux->prox;
+		}
+		cout << "O numero nao esta na lista. \n";
+	}
 	
 }
 
